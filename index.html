@@ -45,6 +45,7 @@
         radial-gradient(ellipse 60% 70% at 50% 100%, rgba(20, 10, 4, 0.9), transparent 50%),
         radial-gradient(circle at 50% 40%, #120c08 0%, #050308 55%, #000 100%);
     }
+
     .dust {
       position: fixed; inset: 0; pointer-events: none; z-index: 8;
       background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,240,200,0.35), transparent),
@@ -59,6 +60,7 @@
       from { transform: translateY(0); }
       to { transform: translateY(-80px); }
     }
+
     .letterbox {
       position: fixed; left: 0; right: 0; height: 7vh; z-index: 20;
       background: #000; pointer-events: none;
@@ -68,6 +70,7 @@
     .letterbox.bot { bottom: 0; }
     body.dived .letterbox.top { transform: translateY(-100%); }
     body.dived .letterbox.bot { transform: translateY(100%); }
+
     .archive {
       position: fixed; top: max(10px, env(safe-area-inset-top)); left: 0; right: 0; text-align: center;
       z-index: 12; pointer-events: none; letter-spacing: 0.55em;
@@ -87,10 +90,12 @@
       color: rgba(243,224,176,0.62);
     }
     body.dived .archive, body.dived .title { opacity: 0; transition: opacity 0.8s; }
+
     .stage {
       position: fixed; inset: 0; display: grid; place-items: center;
       z-index: 2;
     }
+
     .astrarium {
       position: relative;
       width: min(78vh, 620px);
@@ -99,6 +104,7 @@
     .bezel, .halo, .key-well, .gears, .plaque, .filigree {
       transition: opacity 0.9s ease;
     }
+
     .halo {
       position: absolute; inset: -8%;
       background: radial-gradient(circle, rgba(255,176,80,0.16) 0%, transparent 62%);
@@ -109,6 +115,7 @@
       0%, 100% { opacity: 0.55; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.05); }
     }
+
     .bezel {
       position: absolute; inset: 0;
       border-radius: 50%;
@@ -129,12 +136,14 @@
       box-shadow: inset 0 0 30px rgba(0,0,0,0.45);
       pointer-events: none;
     }
+
     .filigree {
       position: absolute; inset: 1.6%;
       width: calc(100% - 3.2%);
       height: calc(100% - 3.2%);
       pointer-events: none;
     }
+
     .glass {
       position: relative; width: 100%; height: 100%;
       border-radius: 50%; overflow: hidden;
@@ -154,6 +163,7 @@
         radial-gradient(ellipse 40% 22% at 30% 18%, rgba(255,255,255,0.22), transparent 55%),
         radial-gradient(circle at 70% 80%, rgba(255,180,80,0.08), transparent 40%);
     }
+
     body.dived .glass {
       position: fixed;
       inset: 0;
@@ -174,6 +184,7 @@
       pointer-events: none;
       transition: opacity 0.9s ease;
     }
+
     .key-well {
       position: absolute; right: -8%; top: 40%;
       width: 22%; height: 22%;
@@ -185,10 +196,12 @@
     }
     .key:active { cursor: grabbing; }
     .key svg { width: 140%; height: 140%; overflow: visible; }
+
     .gears {
       position: absolute; left: -5%; bottom: 18%; width: 26%; height: 26%;
       pointer-events: none; opacity: 0.92;
     }
+
     .plaque {
       position: absolute; left: 50%; bottom: -15.5%;
       transform: translateX(-50%);
@@ -210,6 +223,7 @@
       color: rgba(243,224,176,0.88); min-height: 1.3em;
       letter-spacing: 0.02em;
     }
+
     .hud {
       position: fixed; left: 28px; bottom: 11vh; z-index: 12;
       font-family: Cinzel, serif; font-size: 10px; letter-spacing: 0.28em;
@@ -231,6 +245,7 @@
       font-style: italic; letter-spacing: 0.12em; font-size: 13px;
       color: rgba(243,224,176,0.75);
     }
+
     .hint {
       position: fixed; right: 28px; bottom: 11vh; z-index: 12;
       text-align: right; font-size: 12px; letter-spacing: 0.08em;
@@ -238,6 +253,7 @@
       font-style: italic;
     }
     body.dived .hint { bottom: 32px; right: 32px; }
+
     .gate {
       position: fixed; inset: 0; z-index: 40;
       background: radial-gradient(ellipse at 50% 40%, #140e0a, #000 72%);
@@ -275,12 +291,14 @@
       0%, 100% { opacity: 0.35; }
       50% { opacity: 1; }
     }
+
     .err {
       position: fixed; inset: 20px auto auto 20px; z-index: 60;
       color: #ffb0b0; font: 12px/1.4 ui-monospace, monospace;
       max-width: 70vw; white-space: pre-wrap; display: none;
     }
     .astrarium, .glass, #gl, .key { touch-action: none; }
+
     .wind-btn {
       display: none;
       position: fixed;
@@ -310,6 +328,7 @@
       transform: translateX(-50%) scale(0.96);
     }
     body.dived .wind-btn { opacity: 0; pointer-events: none; }
+
     html.phone .wind-btn,
     html.coarse .wind-btn { display: grid; }
     html.phone .hint { display: none; }
@@ -426,6 +445,7 @@
       </div>
     </div>
   </div>
+
   <div class="title">
     <h1>ASTRARIUM</h1>
     <p>wind the key &nbsp;·&nbsp; witness an aeon &nbsp;·&nbsp; then it forgets</p>
@@ -438,6 +458,7 @@
   <div class="hint" id="hint">drag around the ring · tap the glass to enter · space to wind</div>
   <button type="button" class="wind-btn" id="windBtn" aria-label="Hold to wind">WIND</button>
   <div class="err" id="err"></div>
+
   <div class="gate" id="gate">
     <div class="gate-inner">
       <div class="kicker">RECOVERED · SEALED · SINGING</div>
@@ -446,6 +467,7 @@
       <button type="button" class="cta" id="enterBtn">TAP TO BEGIN</button>
     </div>
   </div>
+
 <!-- astrarium-rev-5: gate handler is inline so Safari cannot get stuck if WebGL hangs -->
 <script>
 (function () {
@@ -469,6 +491,7 @@
   }
 })();
 </script>
-<script src="./app.v5.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/AtlasScope/astrarium-no-vii@7754a16efd7e935980aa718b5926cd272a2aa02d/app.v5.js" defer></script>
+
 </body>
 </html>
