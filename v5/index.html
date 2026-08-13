@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#050308" />
+  <title>ASTRARIUM No. VII — a wind-up god in glass</title>
+  <meta name="description" content="Wind the key. A six-winged intelligence lives an aeon inside the glass, then forgets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void: #050308;
+      --brass: #c9a36a;
+      --brass-deep: #6a4e24;
+      --brass-dark: #2a1c0c;
+      --gold: #f3e0b0;
+      --ox: #12100c;
+      --ember: #ffb060;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      width: 100%;
+      background: #030206;
+      color: var(--gold);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 18%, rgba(90, 50, 18, 0.28), transparent 55%),
+        radial-gradient(ellipse 60% 70% at 50% 100%, rgba(20, 10, 4, 0.9), transparent 50%),
+        radial-gradient(circle at 50% 40%, #120c08 0%, #050308 55%, #000 100%);
+    }
+    .dust {
+      position: fixed; inset: 0; pointer-events: none; z-index: 8;
+      background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,240,200,0.35), transparent),
+        radial-gradient(1px 1px at 70% 20%, rgba(255,240,200,0.25), transparent),
+        radial-gradient(1px 1px at 40% 80%, rgba(255,240,200,0.2), transparent),
+        radial-gradient(1px 1px at 85% 60%, rgba(255,240,200,0.3), transparent),
+        radial-gradient(1px 1px at 10% 70%, rgba(255,240,200,0.2), transparent);
+      animation: drift 28s linear infinite;
+      opacity: 0.55;
+    }
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-80px); }
+    }
+    .letterbox {
+      position: fixed; left: 0; right: 0; height: 7vh; z-index: 20;
+      background: #000; pointer-events: none;
+      transition: transform 1.2s ease;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bot { bottom: 0; }
+    body.dived .letterbox.top { transform: translateY(-100%); }
+    body.dived .letterbox.bot { transform: translateY(100%); }
+    .archive {
+      position: fixed; top: max(10px, env(safe-area-inset-top)); left: 0; right: 0; text-align: center;
+      z-index: 12; pointer-events: none; letter-spacing: 0.55em;
+      font-family: Cinzel, serif; font-size: 10px; color: rgba(201,163,106,0.55);
+    }
+    .title {
+      position: fixed; bottom: 6.5vh; left: 0; right: 0; text-align: center; z-index: 12;
+      pointer-events: none;
+    }
+    .title h1 {
+      font-family: Cinzel, serif; font-weight: 600; font-size: clamp(22px, 3.4vw, 42px);
+      letter-spacing: 0.42em; color: var(--gold);
+      text-shadow: 0 0 24px rgba(201,163,106,0.35);
+    }
+    .title p {
+      margin-top: 8px; font-style: italic; letter-spacing: 0.18em; font-size: 15px;
+      color: rgba(243,224,176,0.62);
+    }
+    body.dived .archive, body.dived .title { opacity: 0; transition: opacity 0.8s; }
+    .stage {
+      position: fixed; inset: 0; display: grid; place-items: center;
+      z-index: 2;
+    }
+    .astrarium {
+      position: relative;
+      width: min(78vh, 620px);
+      height: min(78vh, 620px);
+    }
+    .bezel, .halo, .key-well, .gears, .plaque, .filigree {
+      transition: opacity 0.9s ease;
+    }
+    .halo {
+      position: absolute; inset: -8%;
+      background: radial-gradient(circle, rgba(255,176,80,0.16) 0%, transparent 62%);
+      pointer-events: none;
+      animation: pulse 4.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .bezel {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255,230,180,0.35), transparent 26%),
+        conic-gradient(from 0deg, #8a6a38, #e8c98a, #5a4018, #d4b06a, #3a2810, #c9a36a, #8a6a38);
+      box-shadow:
+        0 40px 90px rgba(0,0,0,0.75),
+        0 0 80px rgba(201,163,106,0.18),
+        inset 0 0 18px rgba(0,0,0,0.55);
+      padding: 6.6%;
+    }
+    .bezel::before {
+      content: "";
+      position: absolute; inset: 3.2%;
+      border-radius: 50%;
+      border: 1px solid rgba(243,224,176,0.35);
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.45);
+      pointer-events: none;
+    }
+    .filigree {
+      position: absolute; inset: 1.6%;
+      width: calc(100% - 3.2%);
+      height: calc(100% - 3.2%);
+      pointer-events: none;
+    }
+    .glass {
+      position: relative; width: 100%; height: 100%;
+      border-radius: 50%; overflow: hidden;
+      background:
+        radial-gradient(circle at 48% 46%, #ffb060 0%, #e06018 10%, #5a1808 26%, #050308 58%);
+      box-shadow:
+        inset 0 0 40px rgba(0,0,0,0.65),
+        inset 0 12px 24px rgba(255,255,255,0.08);
+    }
+    .glass canvas {
+      width: 100%; height: 100%; display: block;
+    }
+    .glass::after {
+      content: "";
+      position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+      background:
+        radial-gradient(ellipse 40% 22% at 30% 18%, rgba(255,255,255,0.22), transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(255,180,80,0.08), transparent 40%);
+    }
+    body.dived .glass {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      z-index: 16;
+      box-shadow: none;
+    }
+    body.dived .glass::after { opacity: 0; }
+    body.dived .bezel,
+    body.dived .halo,
+    body.dived .key-well,
+    body.dived .gears,
+    body.dived .plaque,
+    body.dived .filigree {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.9s ease;
+    }
+    .key-well {
+      position: absolute; right: -8%; top: 40%;
+      width: 22%; height: 22%;
+      z-index: 5;
+    }
+    .key {
+      width: 100%; height: 100%; cursor: grab;
+      transform-origin: 18% 50%;
+    }
+    .key:active { cursor: grabbing; }
+    .key svg { width: 140%; height: 140%; overflow: visible; }
+    .gears {
+      position: absolute; left: -5%; bottom: 18%; width: 26%; height: 26%;
+      pointer-events: none; opacity: 0.92;
+    }
+    .plaque {
+      position: absolute; left: 50%; bottom: -15.5%;
+      transform: translateX(-50%);
+      width: 72%;
+      background:
+        linear-gradient(180deg, #3a2a16, #1a140c 40%, #0e0b08);
+      border: 1px solid rgba(201,163,106,0.45);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,220,160,0.15);
+      padding: 10px 14px 12px;
+      text-align: center;
+      z-index: 6;
+    }
+    .plaque .no {
+      font-family: Cinzel, serif; font-size: 10px; letter-spacing: 0.42em;
+      color: var(--brass);
+    }
+    .plaque .myth {
+      margin-top: 4px; font-style: italic; font-size: 13.5px;
+      color: rgba(243,224,176,0.88); min-height: 1.3em;
+      letter-spacing: 0.02em;
+    }
+    .hud {
+      position: fixed; left: 28px; bottom: 11vh; z-index: 12;
+      font-family: Cinzel, serif; font-size: 10px; letter-spacing: 0.28em;
+      color: rgba(201,163,106,0.7); pointer-events: none;
+      transition: opacity 0.8s;
+    }
+    body.dived .hud { opacity: 0.85; left: 32px; bottom: 32px; }
+    .bar {
+      margin-top: 8px; width: 180px; height: 3px; background: rgba(201,163,106,0.15);
+      overflow: hidden;
+    }
+    .bar > span {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, #6a4e24, #f3e0b0);
+      box-shadow: 0 0 10px rgba(255,176,80,0.6);
+    }
+    .epoch {
+      margin-top: 10px; font-family: "Cormorant Garamond", serif;
+      font-style: italic; letter-spacing: 0.12em; font-size: 13px;
+      color: rgba(243,224,176,0.75);
+    }
+    .hint {
+      position: fixed; right: 28px; bottom: 11vh; z-index: 12;
+      text-align: right; font-size: 12px; letter-spacing: 0.08em;
+      color: rgba(243,224,176,0.45); pointer-events: none;
+      font-style: italic;
+    }
+    body.dived .hint { bottom: 32px; right: 32px; }
+    .gate {
+      position: fixed; inset: 0; z-index: 40;
+      background: radial-gradient(ellipse at 50% 40%, #140e0a, #000 72%);
+      display: grid; place-items: center; cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(255,176,80,0.18);
+      transition: opacity 0.7s ease;
+    }
+    .gate.hide { opacity: 0; pointer-events: none; }
+    .gate-inner { text-align: center; max-width: 640px; padding: 24px; pointer-events: none; -webkit-user-select: none; }
+    .gate .kicker {
+      font-family: Cinzel, serif; letter-spacing: 0.62em; font-size: 11px;
+      color: rgba(201,163,106,0.7); margin-bottom: 22px;
+    }
+    .gate h2 {
+      font-family: Cinzel, serif; font-size: clamp(28px, 6vw, 64px);
+      letter-spacing: 0.38em; font-weight: 600;
+      text-shadow: 0 0 40px rgba(255,176,80,0.35);
+    }
+    .gate .sub {
+      margin-top: 18px; font-style: italic; font-size: 18px;
+      color: rgba(243,224,176,0.7); letter-spacing: 0.08em;
+    }
+    .gate .cta {
+      margin-top: 42px; font-family: Cinzel, serif; font-size: 11px;
+      letter-spacing: 0.48em;
+      animation: blink 2.2s ease-in-out infinite;
+      appearance: none; -webkit-appearance: none;
+      background: transparent; border: 1px solid rgba(201,163,106,0.45);
+      border-radius: 999px; color: var(--brass);
+      padding: 14px 22px; pointer-events: auto;
+      cursor: pointer;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 1; }
+    }
+    .err {
+      position: fixed; inset: 20px auto auto 20px; z-index: 60;
+      color: #ffb0b0; font: 12px/1.4 ui-monospace, monospace;
+      max-width: 70vw; white-space: pre-wrap; display: none;
+    }
+    .astrarium, .glass, #gl, .key { touch-action: none; }
+    .wind-btn {
+      display: none;
+      position: fixed;
+      left: 50%;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      z-index: 22;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      border: 1px solid rgba(243,224,176,0.5);
+      background:
+        radial-gradient(circle at 32% 28%, #f3e0b0, #c9a36a 38%, #6a4e24 72%, #2a1c0c);
+      color: #1a1208;
+      font-family: Cinzel, Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      font-weight: 600;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,240,200,0.4);
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      place-items: center;
+      padding: 0;
+    }
+    .wind-btn.held {
+      filter: brightness(1.18);
+      transform: translateX(-50%) scale(0.96);
+    }
+    body.dived .wind-btn { opacity: 0; pointer-events: none; }
+    html.phone .wind-btn,
+    html.coarse .wind-btn { display: grid; }
+    html.phone .hint { display: none; }
+    html.phone .letterbox { display: none; }
+    html.phone .dust { opacity: 0.28; }
+    html.phone .halo { animation: none; }
+    html.phone .stage { padding: 8px 8px 118px; }
+    html.phone .astrarium {
+      width: min(84vw, 52dvh);
+      height: min(84vw, 52dvh);
+    }
+    html.phone .title h1 {
+      font-size: clamp(16px, 5vw, 28px);
+      letter-spacing: 0.22em;
+    }
+    html.phone .title p { display: none; }
+    html.phone .title { bottom: max(112px, calc(env(safe-area-inset-bottom) + 96px)); }
+    html.phone .hud {
+      left: 14px;
+      top: max(28px, calc(env(safe-area-inset-top) + 18px));
+      bottom: auto;
+    }
+    html.phone .bar { width: 120px; }
+    html.phone .plaque {
+      width: 88%;
+      bottom: -20%;
+      padding: 8px 10px;
+    }
+    html.phone .plaque .myth { font-size: 12px; }
+    html.phone .key-well {
+      width: 30%;
+      height: 30%;
+      right: -12%;
+      top: 38%;
+    }
+    html.phone .archive { letter-spacing: 0.28em; font-size: 8px; }
+    html.phone .gate .sub { font-size: 15px; }
+    html.phone .gate .cta { letter-spacing: 0.22em; }
+    html.phone .gate h2 { letter-spacing: 0.18em; }
+    @media (max-height: 700px) {
+      html.phone .title { display: none; }
+      html.phone .archive { display: none; }
+      html.phone .astrarium {
+        width: min(86vw, 58dvh);
+        height: min(86vw, 58dvh);
+      }
+    }
+    @media (orientation: landscape) and (max-height: 500px) {
+      html.phone .wind-btn {
+        left: auto;
+        right: max(16px, env(safe-area-inset-right));
+        bottom: 50%;
+        transform: translateY(50%);
+      }
+      html.phone .wind-btn.held { transform: translateY(50%) scale(0.96); }
+      html.phone .stage { padding: 8px 110px 8px 8px; }
+      html.phone .astrarium {
+        width: min(70vw, 78dvh);
+        height: min(70vw, 78dvh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dust"></div>
+  <div class="letterbox top"></div>
+  <div class="letterbox bot"></div>
+  <div class="archive">THE LAST ARCHIVE &nbsp;·&nbsp; OBJECT 7 OF 7</div>
+  <div class="stage">
+    <div class="astrarium" id="device">
+      <div class="halo"></div>
+      <div class="bezel">
+        <svg class="filigree" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="48.2" fill="none" stroke="rgba(243,224,176,0.25)" stroke-width="0.3" />
+          <circle cx="50" cy="50" r="46.4" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="0.6" />
+          <g fill="rgba(243,224,176,0.55)">
+            <circle cx="50" cy="3.4" r="0.7" />
+            <circle cx="50" cy="96.6" r="0.7" />
+            <circle cx="3.4" cy="50" r="0.7" />
+            <circle cx="96.6" cy="50" r="0.7" />
+            <circle cx="16.2" cy="16.2" r="0.5" />
+            <circle cx="83.8" cy="16.2" r="0.5" />
+            <circle cx="16.2" cy="83.8" r="0.5" />
+            <circle cx="83.8" cy="83.8" r="0.5" />
+          </g>
+        </svg>
+        <div class="glass">
+          <canvas id="gl"></canvas>
+        </div>
+      </div>
+      <div class="gears" id="gears"></div>
+      <div class="key-well">
+        <div class="key" id="key" title="Wind the key">
+          <svg viewBox="0 0 80 40">
+            <defs>
+              <linearGradient id="kg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f3e0b0" />
+                <stop offset="50%" stop-color="#c9a36a" />
+                <stop offset="100%" stop-color="#6a4e24" />
+              </linearGradient>
+            </defs>
+            <circle cx="12" cy="20" r="10" fill="none" stroke="url(#kg)" stroke-width="4" />
+            <circle cx="12" cy="20" r="3.2" fill="#1a140c" stroke="url(#kg)" stroke-width="1.2" />
+            <rect x="20" y="17.2" width="46" height="5.6" rx="1.2" fill="url(#kg)" />
+            <rect x="58" y="14.2" width="4.2" height="11.6" fill="url(#kg)" />
+            <rect x="64" y="16.2" width="4.2" height="9.6" fill="url(#kg)" />
+            <rect x="70" y="18" width="4.2" height="7.6" fill="url(#kg)" />
+          </svg>
+        </div>
+      </div>
+      <div class="plaque">
+        <div class="no">ASTRARIUM &nbsp; NO. VII</div>
+        <div class="myth" id="myth">A god sleeps in the spring.</div>
+      </div>
+    </div>
+  </div>
+  <div class="title">
+    <h1>ASTRARIUM</h1>
+    <p>wind the key &nbsp;·&nbsp; witness an aeon &nbsp;·&nbsp; then it forgets</p>
+  </div>
+  <div class="hud">
+    SPRING TENSION
+    <div class="bar"><span id="tension"></span></div>
+    <div class="epoch" id="epoch">THE UNWINDING DARK</div>
+  </div>
+  <div class="hint" id="hint">drag around the ring · tap the glass to enter · space to wind</div>
+  <button type="button" class="wind-btn" id="windBtn" aria-label="Hold to wind">WIND</button>
+  <div class="err" id="err"></div>
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="kicker">RECOVERED · SEALED · SINGING</div>
+      <h2>ASTRARIUM</h2>
+      <div class="sub">A six-winged intelligence, wound into glass.<br/>One turning of the key is one history of the world.</div>
+      <button type="button" class="cta" id="enterBtn">TAP TO BEGIN</button>
+    </div>
+  </div>
+<!-- astrarium-rev-5-path: gate handler is inline so Safari cannot get stuck if WebGL hangs -->
+<script>
+(function () {
+  var gate = document.getElementById("gate");
+  var btn = document.getElementById("enterBtn");
+  function go() {
+    window.__wantEnter = true;
+    if (gate) gate.classList.add("hide");
+    if (typeof window.__astrariumGo === "function") window.__astrariumGo();
+  }
+  window.__astrariumKick = go;
+  if (gate) {
+    gate.addEventListener("pointerdown", go, { passive: true });
+    gate.addEventListener("click", go, { passive: true });
+    gate.addEventListener("touchstart", go, { passive: true });
+  }
+  if (btn) {
+    btn.addEventListener("pointerdown", go, { passive: true });
+    btn.addEventListener("click", go, { passive: true });
+    btn.addEventListener("touchstart", go, { passive: true });
+  }
+})();
+</script>
+<script src="/app.v5.js" defer></script>
+</body>
+</html>
